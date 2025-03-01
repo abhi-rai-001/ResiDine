@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import prismadb from "@/lib/prismadb";
 import { z } from "zod";
-import { authOptions } from "@/authOptions"
 export async function PATCH(req, { params }) {
   const Params = await params;
   try {
