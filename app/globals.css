@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+
+/* 🌟 Global Styles for ResiDine */
+:root {
+  --primary: #FF7F50;      /* Coral Orange - CTA, Buttons */
+  --secondary: #2C3E50;    /* Midnight Blue - Headers, Nav */
+  --accent: #F4D03F;       /* Golden Yellow - Ratings, Highlights */
+  --background: #F5F5F5;   /* Soft Light Gray - Background */
+  --text: #333333;         /* Dark Gray - Body Text */
+  --success: #27AE60;      /* Green - Success States */
+  --error: #E74C3C;        /* Red - Error States */
+
+  /* Typography */
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-primary);
+}
+
+/* 🌍 General Page Setup */
+body {
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* 🔗 Links */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+/* 🎨 Buttons */
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: darken(var(--primary), 10%);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: darken(var(--secondary), 10%);
+}
+
+/* 📝 Forms */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+/* ✅ Success & ❌ Error Messages */
+.success {
+  color: var(--success);
+  font-weight: bold;
+}
+
+.error {
+  color: var(--error);
+  font-weight: bold;
+}
+
+/* 📏 Layout Helpers */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🏆 Highlighted Elements */
+.highlight {
+  background-color: var(--accent);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* 📌 Navbar */
+.navbar {
+  background: var(--secondary);
+}
+
+.navbar Link {
+  color: white;
+  margin: 0 15px;
+}
+
+.navbar Link:hover {
+  color: var(--accent);
+}
+
+/* 📜 Footer */
+.footer {
+  background: var(--secondary);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+}
+
+
+
+
+
+
+

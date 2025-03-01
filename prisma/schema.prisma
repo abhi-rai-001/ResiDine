@@ -1,0 +1,115 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Post {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  slug     String    @unique
+  title    String
+  body     String
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId String    @db.ObjectId
+  comments Comment[]
+}
+
+model User {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String   @unique
+  name    String?
+  address Address?
+  posts   Post[]
+}
+
+model Comment {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  comment String
+  post    Post   @relation(fields: [postId], references: [id])
+  postId  String @db.ObjectId
+}
+
+// Address is an embedded document
+type Address {
+  street String
+  city   String
+  state  String
+  zip    String
+}
+
+model Hotel {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String    
+  title       String    @db.String
+  description String    @db.String
+  image       String
+  country     String
+  state       String
+  city        String
+  address     String    @db.String
+  gym         Boolean   @default(false)
+  pool        Boolean   @default(false)
+  restaurant  Boolean   @default(false)
+  roomService Boolean   @default(false)
+  spa         Boolean   @default(false)
+  bar         Boolean   @default(false)
+  wifi        Boolean   @default(false)
+  laundry     Boolean   @default(false)
+  parking     Boolean   @default(false)
+  breakfast   Boolean   @default(false)
+  pets        Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  rooms       Room[]
+  bookings    Booking[]
+
+  @@map("hotels")
+}
+
+model Room {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  title        String  @db.String
+  description  String  @db.String
+  price        Int
+  image        String
+  peopleCount  Int
+  bedCount     Int
+  kingSizeBed  Boolean @default(false)
+  queenSizeBed Boolean @default(false)
+  singleBed    Boolean @default(false)
+  sofaBed      Boolean @default(false)
+  bathroom     Boolean @default(false)
+  balcony      Boolean @default(false)
+  wifi         Boolean @default(false)
+  minibar      Boolean @default(false)
+  safe         Boolean @default(false)
+  
+  hotelId  String    @db.ObjectId
+  hotel    Hotel     @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  bookings Booking[]
+}
+
+model Booking {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  userEmail       String   @db.String
+  userName        String  
+   userId          String  
+  checkInDate     DateTime @db.Date
+  checkOutDate    DateTime @db.Date
+  price           Int
+  phone           String
+  guest           Int      
+  days            Int     
+  paymentStatus   Boolean  @default(false)
+  paymentIntentId String?
+  bookedAt        DateTime @default(now())
+  hotelName       String   @db.String
+  hotelOwnerId    String 
+  hotelId         String   @db.ObjectId
+  hotel           Hotel    @relation(fields: [hotelId], references: [id])
+  roomId          String   @db.ObjectId
+  room            Room     @relation(fields: [roomId], references: [id])
+}
